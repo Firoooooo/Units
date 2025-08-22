@@ -2,9 +2,9 @@
 
 namespace UnitTExamples.AXReader
 {
-    internal class AxMacroWriter : AxRootPredecessor
+    internal class AXMacroReader : AXRootPredecessor
     {
-        public AxMacroWriter(AXType _xMLType, AXXMLDocument _xMLDocument, string _xPath)
+        public AXMacroReader(AXType _xMLType, AXXMLDocument _xMLDocument, string _xPath)
             : base(_xMLType, _xMLDocument, _xPath)
         {
 

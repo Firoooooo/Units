@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>AccountStructureContract</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+///    The <c>AccountStructureContract</c> class is the data contract class for the
+///    <c>DimensionService</c> service.
+/// </summary>
+/// <remarks>
+///    This class is the data contract class for the <c>DimensionService</c> service.
+/// </remarks>
+[DataContractAttribute]
+public class AccountStructureContract
+{
+    Description    description;
+    Name    name;
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>parmDescription</Name>
+				<Source><![CDATA[
+        /// <summary>
+    /// Gets or sets the value of the datacontract parameter description.
+    /// </summary>
+    /// <param name="_description">
+    /// The new value of the datacontract parameter description; optional.
+    /// </param>
+    /// <returns>
+    ///  The current value of datacontract parameter description
+    /// </returns>
+    [DataMemberAttribute]
+    public Description parmDescription(Description _description = description)
+    {
+        description = _description;
+        return description;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>parmName</Name>
+				<Source><![CDATA[
+        /// <summary>
+    /// Gets or sets the value of the datacontract parameter name.
+    /// </summary>
+    /// <param name="_name">
+    /// The new value of the datacontract parameter name; optional.
+    /// </param>
+    /// <returns>
+    ///  The current value of datacontract parameter name
+    /// </returns>
+    [DataMemberAttribute]
+    public Name parmName(Name _name = name)
+    {
+        name = _name;
+        return name;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

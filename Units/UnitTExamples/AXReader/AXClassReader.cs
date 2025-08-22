@@ -2,7 +2,7 @@
 
 namespace UnitTExamples.AXReader
 {
-    internal class AXClassReader : AxRootPredecessor
+    internal class AXClassReader : AXRootPredecessor
     {
         public string FillTags { get; set; }
 

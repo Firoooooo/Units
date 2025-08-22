@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxTable xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>CurrencyLedgerGainLossAccount</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public class CurrencyLedgerGainLossAccount extends common
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>checkExist</Name>
+				<Source><![CDATA[
+        public static boolean checkExist(RecId _recId)
+    {
+        boolean isExisting = true;
+
+        if (!CurrencyLedgerGainLossAccount::exist(_recId))
+        {
+            isExisting = checkFailed(strfmt(CurrencyLedgerGainLossAccount::txtNotExist(), _recId));
+        }
+
+        return isExisting;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>exist</Name>
+				<Source><![CDATA[
+        public static boolean exist(RecId _recId)
+    {
+        CurrencyLedgerGainLossAccount currencyLedgerGainLossAccount;
+
+        select firstonly
+            RecId
+        from
+            currencyLedgerGainLossAccount
+        where
+            currencyLedgerGainLossAccount.RecId == _recId;
+
+        return currencyLedgerGainLossAccount != null;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>find</Name>
+				<Source><![CDATA[
+        public static CurrencyLedgerGainLossAccount find(
+        RecId _recId,
+        boolean _forupdate = false,
+        ConcurrencyModel _concurrencyModel = ConcurrencyModel::Auto)
+    {
+        CurrencyLedgerGainLossAccount currencyLedgerGainLossAccount;
+
+        currencyLedgerGainLossAccount.selectForUpdate(_forupdate);
+        if (_forupdate  && _concurrencyModel != ConcurrencyModel::Auto)
+        {
+            currencyLedgerGainLossAccount.concurrencyModel(_concurrencyModel);
+        }
+
+        select firstonly currencyLedgerGainLossAccount
+            where currencyLedgerGainLossAccount.RecId == _recId;
+
+        return currencyLedgerGainLossAccount;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>findByCurrencyLedgerAccountType</Name>
+				<Source><![CDATA[
+        /// <summary>
+    /// Finds the specified record in the <c>CurrencyLedgerGainLossAccount</c> table.
+    /// </summary>
+    /// <param name="_ledger">
+    /// The ledger of the  <c>CurrencyLedgerGainLossAccount</c> record.
+    /// </param>
+    /// <param name="_currencyCode">
+    /// The currency code of the  <c>CurrencyLedgerGainLossAccount</c> record.
+    /// </param>
+    /// <param name="_accountType">
+    /// The currency gain loss account type of the  <c>CurrencyLedgerGainLossAccount</c> record.
+    /// </param>
+    /// <param name="_forupdate">
+    /// A Boolean value that indicates whether to read the record for update; optional.
+    /// </param>
+    /// <returns>
+    /// A <c>CurrencyLedgerGainLossAccount</c> record; otherwise, an empty record.
+    /// </returns>
+    public static CurrencyLedgerGainLossAccount findByCurrencyLedgerAccountType(
+        RecId _ledger,
+        CurrencyCode _currencyCode,
+        CurrencyGainLossAccountType _accountType,
+        boolean _forupdate = false)
+    {
+        CurrencyLedgerGainLossAccount currencyLedgerGainLossAccount;
+
+        currencyLedgerGainLossAccount.selectForUpdate(_forupdate);
+
+        select firstonly
+                currencyLedgerGainLossAccount
+            where
+                currencyLedgerGainLossAccount.CurrencyCode == _currencyCode
+                && currencyLedgerGainLossAccount.Ledger == _ledger
+                && currencyLedgerGainLossAccount.AccountType == _accountType;
+
+        return currencyLedgerGainLossAccount;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>ledgerDimension</Name>
+				<Source><![CDATA[
+        /// <summary>
+    /// Retrieves the default account of the ledger dimension for the passed in parameters.
+    /// </summary>
+    /// <param name="_ledger">
+    /// The ledger of the <c>CurrencyLedgerGainLossAccount</c> record.
+    /// </param>
+    /// <param name="_currencyCode">
+    /// The currency code of the <c>CurrencyLedgerGainLossAccount</c> record.
+    /// </param>
+    /// <param name="_accountType">
+    /// The currency gain loss account type of the <c>CurrencyLedgerGainLossAccount</c> record.
+    /// </param>
+    /// <returns>
+    /// The ledger dimension default account for the specified values.
+    /// </returns>
+    /// <remarks>
+    /// The method will first check if a ledger dimension default account exists in the
+    /// <c>CurrencyLedgerGainLossAccount</c> table. If the ledger dimension default account is not found in
+    /// the <c>CurrencyLedgerGainLossAccount</c> table, the method will check the
+    /// <c>LedgerGainLossAccount</c> table.
+    /// </remarks>
+    public static LedgerDimensionDefaultAccount ledgerDimension(
+        RecId _ledger,
+        CurrencyCode _currencyCode,
+        CurrencyGainLossAccountType _accountType)
+    {
+        LedgerDimensionDefaultAccount defaultLedgerDimension;
+
+        // look from LedgerDimension in the CurrencyLedgerGainLossAccount table
+        defaultLedgerDimension = CurrencyLedgerGainLossAccount::findByCurrencyLedgerAccountType(
+            _ledger,
+            _currencyCode,
+            _accountType).LedgerDimension;
+
+        if (defaultLedgerDimension == 0)
+        {
+            // look for ledgerDimension in the LedgerGainLossAccount table
+            defaultLedgerDimension = LedgerGainLossAccount::findByLedgerAccountType(
+                _ledger,
+                _accountType).LedgerDimension;
+        }
+
+        return defaultLedgerDimension;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>txtNotExist</Name>
+				<Source><![CDATA[
+        public static TxtNotExist txtNotExist()
+    {
+        return "@SYS102169";
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+	<DeveloperDocumentation>@SYS312390</DeveloperDocumentation>
+	<FormRef>CurrencyLedgerGainLossAccount</FormRef>
+	<Label>@SYS312389</Label>
+	<TableGroup>Group</TableGroup>
+	<TitleField1>CurrencyCode</TitleField1>
+	<TitleField2>Ledger</TitleField2>
+	<AllowRowVersionChangeTracking>Yes</AllowRowVersionChangeTracking>
+	<CacheLookup>Found</CacheLookup>
+	<ClusteredIndex>CurrencyLedgerGainLossAccountIdx</ClusteredIndex>
+	<Modules>Currency</Modules>
+	<ReplacementKey>CurrencyLedgerGainLossAccountIdx</ReplacementKey>
+	<SaveDataPerCompany>No</SaveDataPerCompany>
+	<DeleteActions />
+	<FieldGroups>
+		<AxTableFieldGroup>
+			<Name>AutoReport</Name>
+			<Fields>
+				<AxTableFieldGroupField>
+					<DataField>CurrencyCode</DataField>
+				</AxTableFieldGroupField>
+				<AxTableFieldGroupField>
+					<DataField>Ledger</DataField>
+				</AxTableFieldGroupField>
+				<AxTableFieldGroupField>
+					<DataField>AccountType</DataField>
+				</AxTableFieldGroupField>
+				<AxTableFieldGroupField>
+					<DataField>LedgerDimension</DataField>
+				</AxTableFieldGroupField>
+			</Fields>
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoLookup</Name>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoIdentification</Name>
+			<AutoPopulate>Yes</AutoPopulate>
+			<Fields>
+				<AxTableFieldGroupField>
+					<DataField>CurrencyCode</DataField>
+				</AxTableFieldGroupField>
+				<AxTableFieldGroupField>
+					<DataField>Ledger</DataField>
+				</AxTableFieldGroupField>
+				<AxTableFieldGroupField>
+					<DataField>AccountType</DataField>
+				</AxTableFieldGroupField>
+			</Fields>
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoSummary</Name>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoBrowse</Name>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>All</Name>
+			<Label>@SYS11696</Label>
+			<Fields>
+				<AxTableFieldGroupField>
+					<DataField>CurrencyCode</DataField>
+				</AxTableFieldGroupField>
+				<AxTableFieldGroupField>
+					<DataField>LedgerDimension</DataField>
+				</AxTableFieldGroupField>
+				<AxTableFieldGroupField>
+					<DataField>AccountType</DataField>
+				</AxTableFieldGroupField>
+				<AxTableFieldGroupField>
+					<DataField>Ledger</DataField>
+				</AxTableFieldGroupField>
+			</Fields>
+		</AxTableFieldGroup>
+	</FieldGroups>
+	<Fields>
+		<AxTableField xmlns=""
+			i:type="AxTableFieldEnum">
+			<Name>AccountType</Name>
+			<AssetClassification>Customer Content</AssetClassification>
+			<Mandatory>Yes</Mandatory>
+			<EnumType>CurrencyGainLossAccountType</EnumType>
+		</AxTableField>
+		<AxTableField xmlns=""
+			i:type="AxTableFieldString">
+			<Name>CurrencyCode</Name>
+			<AssetClassification>Customer Content</AssetClassification>
+			<ExtendedDataType>CurrencyCode</ExtendedDataType>
+			<Mandatory>Yes</Mandatory>
+		</AxTableField>
+		<AxTableField xmlns=""
+			i:type="AxTableFieldInt64">
+			<Name>Ledger</Name>
+			<AssetClassification>Customer Content</AssetClassification>
+			<ExtendedDataType>LedgerRecId</ExtendedDataType>
+			<Mandatory>Yes</Mandatory>
+		</AxTableField>
+		<AxTableField xmlns=""
+			i:type="AxTableFieldInt64">
+			<Name>LedgerDimension</Name>
+			<AssetClassification>Customer Content</AssetClassification>
+			<ExtendedDataType>LedgerDimensionDefaultAccount</ExtendedDataType>
+			<Mandatory>Yes</Mandatory>
+		</AxTableField>
+	</Fields>
+	<FullTextIndexes />
+	<Indexes>
+		<AxTableIndex>
+			<Name>CurrencyLedgerGainLossAccountIdx</Name>
+			<AlternateKey>Yes</AlternateKey>
+			<Fields>
+				<AxTableIndexField>
+					<DataField>CurrencyCode</DataField>
+				</AxTableIndexField>
+				<AxTableIndexField>
+					<DataField>Ledger</DataField>
+				</AxTableIndexField>
+				<AxTableIndexField>
+					<DataField>AccountType</DataField>
+				</AxTableIndexField>
+			</Fields>
+		</AxTableIndex>
+	</Indexes>
+	<Mappings />
+	<Relations>
+		<AxTableRelation xmlns=""
+			i:type="AxTableRelationForeignKey">
+			<Name>Currency</Name>
+			<Cardinality>ZeroMore</Cardinality>
+			<OnDelete>Cascade</OnDelete>
+			<RelatedTable>Currency</RelatedTable>
+			<RelatedTableCardinality>ZeroOne</RelatedTableCardinality>
+			<RelatedTableRole>Currency</RelatedTableRole>
+			<RelationshipType>Association</RelationshipType>
+			<Role>Currency_CurrencyLedgerGainLossAccount</Role>
+			<UseDefaultRoleNames>No</UseDefaultRoleNames>
+			<Constraints>
+				<AxTableRelationConstraint xmlns=""
+					i:type="AxTableRelationConstraintField">
+					<Name>CurrencyCode</Name>
+					<SourceEDT>CurrencyCode</SourceEDT>
+					<Field>CurrencyCode</Field>
+					<RelatedField>CurrencyCode</RelatedField>
+				</AxTableRelationConstraint>
+			</Constraints>
+			<Index>CurrencyCodeIdx</Index>
+		</AxTableRelation>
+		<AxTableRelation xmlns=""
+			i:type="AxTableRelationForeignKey">
+			<Name>Ledger</Name>
+			<Cardinality>ZeroMore</Cardinality>
+			<RelatedTable>Ledger</RelatedTable>
+			<RelatedTableCardinality>ZeroOne</RelatedTableCardinality>
+			<RelatedTableRole>Ledger</RelatedTableRole>
+			<RelationshipType>Association</RelationshipType>
+			<Role>Ledger_CurrencyLedgerGainLossAccount</Role>
+			<UseDefaultRoleNames>No</UseDefaultRoleNames>
+			<Constraints>
+				<AxTableRelationConstraint xmlns=""
+					i:type="AxTableRelationConstraintField">
+					<Name>Ledger</Name>
+					<Field>Ledger</Field>
+					<RelatedField>RecId</RelatedField>
+				</AxTableRelationConstraint>
+			</Constraints>
+			<Index>RecId</Index>
+		</AxTableRelation>
+		<AxTableRelation xmlns=""
+			i:type="AxTableRelationForeignKey">
+			<Name>LedgerDimension</Name>
+			<Cardinality>ZeroMore</Cardinality>
+			<RelatedTable>DimensionAttributeValueCombination</RelatedTable>
+			<RelatedTableCardinality>ZeroOne</RelatedTableCardinality>
+			<RelatedTableRole>DimensionAttributeValueCombination</RelatedTableRole>
+			<RelationshipType>Association</RelationshipType>
+			<Role>DimensionAttributeValueCombination_CurrencyLedgerGainLossAccount</Role>
+			<UseDefaultRoleNames>No</UseDefaultRoleNames>
+			<Constraints>
+				<AxTableRelationConstraint xmlns=""
+					i:type="AxTableRelationConstraintField">
+					<Name>LedgerDimension</Name>
+					<Field>LedgerDimension</Field>
+					<RelatedField>RecId</RelatedField>
+				</AxTableRelationConstraint>
+			</Constraints>
+			<Index>RecId</Index>
+		</AxTableRelation>
+	</Relations>
+	<StateMachines />
+</AxTable>

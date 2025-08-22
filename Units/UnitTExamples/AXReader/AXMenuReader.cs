@@ -1,8 +1,8 @@
 ﻿namespace UnitTExamples.AXReader
 {
-    internal class AxMenuReader : AxRootPredecessor
+    internal class AXMenuReader : AXRootPredecessor
     {
-        public AxMenuReader(AXType _xMLType, AXXMLDocument _xMLDocument, string _xPath)
+        public AXMenuReader(AXType _xMLType, AXXMLDocument _xMLDocument, string _xPath)
             : base(_xMLType, _xMLDocument, _xPath)
         {
 

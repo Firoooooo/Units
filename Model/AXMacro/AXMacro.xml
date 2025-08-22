@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxMacroDictionary xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ApplicationFoundationFlights</Name>
+	<Source>#define.DMFExportToPackageForceSync('DMFExportToPackageForceSync')&#xD;
+#define.DMFEnableAllCompanyExport('DMFEnableAllCompanyExport')&#xD;
+#define.AnalyticsRealTimeReporting('AnalyticsRealTimeReporting')&#xD;
+#define.AnalyticsReportWebEditor('AnalyticsReportWebEditor')&#xD;
+#define.EntityNamesInPascalCaseInXMLFiles('EntityNamesInPascalCaseInXMLFiles')&#xD;
+#define.EnableAttachmentForPackageApi('EnableAttachmentForPackageApi')&#xD;
+#define.DMFInsertStagingLogToContainer('DMFInsertStagingLogToContainer')&#xD;
+#define.ExportWhileDataEntityListIsBeingRefreshed('ExportWhileDataEntityListIsBeingRefreshed')&#xD;
+#define.DMFDisableExportFieldsMappingCache('DMFDisableExportFieldsMappingCache')&#xD;
+#define.DMFDisableXSLTTransformationForCompositeEntity('DMFDisableXSLTTransformationForCompositeEntity')&#xD;
+#define.DMFDisableInputFileCheckInPackageImport('DMFDisableInputFileCheckInPackageImport')&#xD;
+#define.SysAdminNetworkPrinterManager('SysAdminNetworkPrinterManager')&#xD;
+#define.SrsReportUserConnectionFinalizerLegacy('SrsReportUserConnectionFinalizerLegacy')&#xD;
+#define.SrsReportCleanUpBatchJobLegacy('SrsReportCleanUpBatchJobLegacy')&#xD;
+#define.DMFByodMissingDelete('DMFByodMissingDelete')&#xD;
+#define.FailErrorOnBatchForExport('FailErrorOnBatchForExport')&#xD;
+#define.BusinessEventsMaster('BusinessEventsMaster')&#xD;
+#define.BusinessEventsSizeLimitCheck('BusinessEventsSizeLimitCheck')&#xD;
+#define.EnableBYODDboSchemaOnly('EnableBYODDboSchemaOnly')&#xD;
+#define.AllowEmptyDateTimeXMLElement('AllowEmptyDateTimeXMLElement')&#xD;
+#define.EnableBYODDboSchemaOnly('EnableBYODDboSchemaOnly')&#xD;
+#define.DisablePendingRecordFromJobStatus('DisablePendingRecordFromJobStatus')&#xD;
+#define.ClientAlertsEmailHandler('ClientAlertsEmailHandler')&#xD;
+#define.FillEmptyXMLFileWhenExportingCompositeEntity('FillEmptyXMLFileWhenExportingCompositeEntity')&#xD;
+#define.EnableNewNamingForPackageAPIExport('EnableNewNamingForPackageAPIExport')&#xD;
+#define.DisableDownloadFileWithZeroRecords('DisableDownloadFileWithZeroRecords')&#xD;
+#define.DMFDisableDoubleByteCharacterExport('DMFDisableDoubleByteCharacterExport')&#xD;
+#define.EnableEntityAttributesPascalCase('EnableEntityAttributesPascalCase')&#xD;
+#define.DisableExportingContainerFieldIntoFile('DisableExportingContainerFieldIntoFile')&#xD;
+#define.EnableEnumSymbolSupportForImportExport('EnableEnumSymbolSupportForImportExport')&#xD;
+#define.DisableAnalyticsReportEditor('DisableAnalyticsReportEditor')&#xD;
+#define.DisableCustomizeAnalyticsTab('DisableCustomizeAnalyticsTab')&#xD;
+#define.DataFeedsMaster('DataFeedsMaster')&#xD;
+#define.ForceLegacyBatchFinishedJobsProcessing('ForceLegacyBatchFinishedJobsProcessing')&#xD;
+#define.DMFEnableSQLConnectTimeoutRetry('DMFEnableSQLConnectTimeoutRetry')&#xD;
+#define.DisableBuildRelationsForView('DisableBuildRelationsForView')&#xD;
+#define.DisableDatabaseLogConsistencyCheck('DisableDatabaseLogConsistencyCheck')&#xD;
+#define.DisableDataSourceClauseInLabelLookup('DisableDataSourceClauseInLabelLookup')&#xD;
+#define.DisableLoadRelationUsingRelationName('DisableLoadRelationUsingRelationName')&#xD;
+#define.DisableLookupRangeWithCompany('DisableLookupRangeWithCompany')&#xD;
+#define.DisableDualWriteTransIdOptimization('DisableDualWriteTransIdOptimization')&#xD;
+#define.DisableSysErrorMessageHelpScope('DisableSysErrorMessageHelpScope')&#xD;
+#define.DisableSysErrorMessageHelpScopeFixIssuesLink('DisableSysErrorMessageHelpScopeFixIssuesLink')&#xD;
+#define.DisableSysErrorMessageHelpScopeBatch('DisableSysErrorMessageHelpScopeBatch')&#xD;
+#define.DisableSysErrorMessageHelpScopeBatchFixIssuesLink('DisableSysErrorMessageHelpScopeBatchFixIssuesLink')&#xD;
+#define.DisableSysErrorMessageHelpScopeWorkflow('DisableSysErrorMessageHelpScopeWorkflow')&#xD;
+#define.DisableSysErrorMessageHelpScopeBuildPrefix('DisableSysErrorMessageHelpScopeBuildPrefix')&#xD;
+#define.DisableRelationIdCombination('DisableRelationIdCombination')&#xD;
+#define.DisableSysExtensionCacheCleanupDuringDbSync('DisableSysExtensionCacheCleanupDuringDbSync')&#xD;
+#define.EnableDDLExecutionTelemetry('EnableDDLExecutionTelemetry')&#xD;
+#define.DisableBatchJobsLogFiltering('DisableBatchJobsLogFiltering')&#xD;
+</Source>
+	<Macros />
+</AxMacroDictionary>

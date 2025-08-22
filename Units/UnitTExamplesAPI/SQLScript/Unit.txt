@@ -1,0 +1,13 @@
+CREATE DATABASE Unit;
+
+CREATE TABLE Users (
+	UserID INT NOT NULL, 
+	Vorname VARCHAR (30),
+	Nachname VARCHAR (30),
+	EMail VARCHAR (30),
+	Password VARCHAR (30),
+	PRIMARY KEY (UserID)
+);
+
+INSERT INTO Users VALUES (
+1, 'Firat', 'Haksever', 'Moin', '123456');

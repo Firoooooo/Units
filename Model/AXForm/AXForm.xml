@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxForm xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="Microsoft.Dynamics.AX.Metadata.V6">
+	<Name>CompanyInfoList</Name>
+	<SourceCode>
+		<Methods xmlns="">
+			<Method>
+				<Name>classDeclaration</Name>
+				<Source><![CDATA[
+[Form]
+public class CompanyInfoList extends FormRun implements CompanyInfoIList
+{
+    MainAccount             mainAccount;
+    DimensionAttributeValue dimensionAttributeValue;
+    dataAreaId              selectedDataAreaId;
+}
+]]></Source>
+			</Method>
+			<Method>
+				<Name>init</Name>
+				<Source><![CDATA[
+    public void init()
+    {
+        if (element.args().record())
+        {
+            if (element.args().record().TableId == tableNum(MainAccount))
+            {
+                mainAccount.data(element.args().record());
+            }
+            else if (element.args().record().TableId == tableNum(DimensionAttributeValue))
+            {
+                dimensionAttributeValue.data(element.args().record());
+            }
+        }
+
+        super();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>selectedDataAreaId</Name>
+				<Source><![CDATA[
+    public dataAreaId selectedDataAreaId()
+    {
+        return selectedDataAreaId;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+		<DataSources xmlns="">
+			<DataSource>
+				<Name>DataArea</Name>
+				<Methods>
+					<Method>
+						<Name>executeQuery</Name>
+						<Source><![CDATA[
+        public void executeQuery()
+        {
+            CompanyInfo                         companyInfoList;
+            Ledger                              ledgerList;
+            MainAccountLegalEntity              mainAccountLegalEntityList;
+            DimensionAttrValueLedgerOverride    dimensionAttrValueLedgerOverride;
+            Query                               query;
+            QueryBuildDataSource                queryBuildDataSource;
+            QueryBuildRange                     queryBuildRangeId;
+            str                                 dataAreaList = '';
+
+            query = new Query();
+
+            queryBuildDataSource = query.addDataSource(tableNum(DataArea));
+            queryBuildDataSource.clearDynalinks();
+            queryBuildDataSource.addSortField(fieldNum(DataArea, Id));
+            queryBuildRangeId = queryBuildDataSource.addRange(fieldNum(DataArea, Id));
+            queryBuildRangeId.status(RangeStatus::Hidden);
+
+            if (mainAccount)
+            {
+                while select DataArea from companyInfoList
+                    join RecId from ledgerList
+                        where ledgerList.PrimaryForLegalEntity == companyInfoList.RecId &&
+                            ledgerList.ChartOfAccounts == mainAccount.LedgerChartOfAccounts
+                    notexists join RecId from mainAccountLegalEntityList
+                        where mainAccountLegalEntityList.LegalEntity == companyInfoList.RecId &&
+                            mainAccountLegalEntityList.MainAccount == mainAccount.RecId
+                {
+                    if (dataAreaList != '')
+                    {
+                        dataAreaList += ',';
+                    }
+
+                    dataAreaList = dataAreaList + companyInfoList.DataArea;
+                }
+            }
+            else if (dimensionAttributeValue)
+            {
+                while select DataArea from companyInfoList
+                    join RecId from ledgerList
+                        where ledgerList.PrimaryForLegalEntity == companyInfoList.RecId
+                    notexists join RecId from dimensionAttrValueLedgerOverride
+                        where dimensionAttrValueLedgerOverride.Ledger == ledgerList.RecId &&
+                            dimensionAttrValueLedgerOverride.DimensionAttributeValue == dimensionAttributeValue.RecId
+                {
+                    if (dataAreaList != '')
+                    {
+                        dataAreaList += ',';
+                    }
+
+                    dataAreaList = dataAreaList + companyInfoList.DataArea;
+                }
+            }
+
+            if (dataAreaList == '')
+            {
+                queryBuildRangeId.value('1==0');
+            }
+            else
+            {
+                queryBuildRangeId.value(dataAreaList);
+            }
+
+            // Over ride the datasource query;
+            dataArea_DS.query(query);
+
+            super();
+        }
+
+]]></Source>
+					</Method>
+				</Methods>
+				<Fields />
+			</DataSource>
+		</DataSources>
+		<DataControls xmlns="">
+			<Control>
+				<Name>SelectCompanyInfoBtn</Name>
+				<Type>Button</Type>
+				<Methods>
+					<Method>
+						<Name>clicked</Name>
+						<Source><![CDATA[
+        void clicked()
+        {
+            CompanyInfo                         companyInfo;
+            MainAccountLegalEntity              mainAccountLegalEntity;
+            DimensionAttrValueLedgerOverride    dimensionAttrValueLedgerOverride;
+        
+            if (dataArea)
+            {
+                companyInfo = CompanyInfo::findDataArea(dataArea.Id);
+        
+                if (mainAccount)
+                {
+                    mainAccountLegalEntity.MainAccount = mainAccount.RecId;
+                    mainAccountLegalEntity.LegalEntity = companyInfo.RecId;
+                    mainAccountLegalEntity.insert();
+                }
+                else if (dimensionAttributeValue)
+                {
+                    dimensionAttrValueLedgerOverride.DimensionAttributeValue = dimensionAttributeValue.RecId;
+                    dimensionAttrValueLedgerOverride.Ledger = ledger::primaryLedger(companyInfo::current(DataArea.id));
+        
+                    dimensionAttrValueLedgerOverride.ActiveFrom = dimensionAttributeValue.ActiveFrom;
+                    dimensionAttrValueLedgerOverride.ActiveTo = dimensionAttributeValue.ActiveTo;
+                    dimensionAttrValueLedgerOverride.IsSuspended = dimensionAttributeValue.IsSuspended;
+                    dimensionAttrValueLedgerOverride.insert();
+                }
+        
+                selectedDataAreaId = dataArea.Id;
+            }
+
+            element.closeOk();
+        }
+
+]]></Source>
+					</Method>
+				</Methods>
+			</Control>
+		</DataControls>
+		<Members xmlns="" />
+	</SourceCode>
+	<DataSources>
+		<AxFormDataSource xmlns="">
+			<Name>DataArea</Name>
+			<Table>DataArea</Table>
+			<Fields>
+				<AxFormDataSourceField>
+					<DataField>alwaysNative</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>dataAreaId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>id</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>isVirtual</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>name</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>RecId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>TableId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>timeZone</DataField>
+				</AxFormDataSourceField>
+			</Fields>
+			<ReferencedDataSources />
+			<AllowCreate>No</AllowCreate>
+			<AllowDelete>No</AllowDelete>
+			<AllowEdit>No</AllowEdit>
+			<DataSourceLinks />
+			<DerivedDataSources />
+		</AxFormDataSource>
+	</DataSources>
+	<Design>
+		<AllowFormCompanyChange xmlns="">Yes</AllowFormCompanyChange>
+		<BackgroundColor xmlns="">WindowBackground</BackgroundColor>
+		<Caption xmlns="">@Dimension:AddLegalEntityOverrideHelpText</Caption>
+		<DataSource xmlns="">DataArea</DataSource>
+		<HeightMode xmlns="">SizeToContent</HeightMode>
+		<Pattern xmlns="">DropDialog</Pattern>
+		<PatternVersion xmlns="">1.2</PatternVersion>
+		<SetCompany xmlns="">No</SetCompany>
+		<Style xmlns="">DropDialog</Style>
+		<WidthMode xmlns="">SizeToAvailable</WidthMode>
+		<Controls xmlns="">
+			<AxFormControl xmlns=""
+				i:type="AxFormGroupControl">
+				<Name>DialogContent</Name>
+				<Pattern>ToolbarList</Pattern>
+				<PatternVersion>1.2</PatternVersion>
+				<Type>Group</Type>
+				<WidthMode>SizeToAvailable</WidthMode>
+				<FormControlExtension
+					i:nil="true" />
+				<Controls>
+					<AxFormControl xmlns=""
+						i:type="AxFormGroupControl">
+						<Name>QuickFilter</Name>
+						<Pattern>CustomFilters</Pattern>
+						<PatternVersion>1.1</PatternVersion>
+						<Type>Group</Type>
+						<WidthMode>SizeToAvailable</WidthMode>
+						<FormControlExtension
+							i:nil="true" />
+						<Controls>
+							<AxFormControl>
+								<Name>DataAreaIdQuickFilter</Name>
+								<FormControlExtension>
+									<Name>QuickFilterControl</Name>
+									<ExtensionComponents />
+									<ExtensionProperties>
+										<AxFormControlExtensionProperty>
+											<Name>targetControlName</Name>
+											<Type>String</Type>
+											<Value>Grid</Value>
+										</AxFormControlExtensionProperty>
+										<AxFormControlExtensionProperty>
+											<Name>defaultColumnName</Name>
+											<Type>String</Type>
+											<Value>DataArea_id</Value>
+										</AxFormControlExtensionProperty>
+										<AxFormControlExtensionProperty>
+											<Name>placeholderText</Name>
+											<Type>String</Type>
+										</AxFormControlExtensionProperty>
+									</ExtensionProperties>
+								</FormControlExtension>
+							</AxFormControl>
+						</Controls>
+						<ArrangeMethod>HorizontalLeft</ArrangeMethod>
+						<FrameType>None</FrameType>
+						<Style>CustomFilter</Style>
+						<ViewEditMode>Edit</ViewEditMode>
+					</AxFormControl>
+					<AxFormControl xmlns=""
+						i:type="AxFormGridControl">
+						<Name>Grid</Name>
+						<AllowEdit>No</AllowEdit>
+						<ElementPosition>1431655764</ElementPosition>
+						<FilterExpression>%1</FilterExpression>
+						<Type>Grid</Type>
+						<VerticalSpacing>-1</VerticalSpacing>
+						<FormControlExtension
+							i:nil="true" />
+						<Controls>
+							<AxFormControl xmlns=""
+								i:type="AxFormStringControl">
+								<Name>DataArea_id</Name>
+								<ElementPosition>1073741823</ElementPosition>
+								<FilterExpression>%1</FilterExpression>
+								<Type>String</Type>
+								<VerticalSpacing>-1</VerticalSpacing>
+								<FormControlExtension
+									i:nil="true" />
+								<DataField>id</DataField>
+								<DataSource>DataArea</DataSource>
+							</AxFormControl>
+							<AxFormControl xmlns=""
+								i:type="AxFormStringControl">
+								<Name>DataArea_name</Name>
+								<ElementPosition>1610612734</ElementPosition>
+								<FilterExpression>%1</FilterExpression>
+								<Type>String</Type>
+								<VerticalSpacing>-1</VerticalSpacing>
+								<FormControlExtension
+									i:nil="true" />
+								<DataField>name</DataField>
+								<DataSource>DataArea</DataSource>
+							</AxFormControl>
+						</Controls>
+						<DataSource>DataArea</DataSource>
+						<MultiSelect>No</MultiSelect>
+						<ShowRowLabels>No</ShowRowLabels>
+						<Style>Tabular</Style>
+					</AxFormControl>
+				</Controls>
+				<Style>DialogContent</Style>
+			</AxFormControl>
+			<AxFormControl xmlns=""
+				i:type="AxFormButtonGroupControl">
+				<Name>DialogCommitContainer</Name>
+				<Type>ButtonGroup</Type>
+				<WidthMode>SizeToAvailable</WidthMode>
+				<FormControlExtension
+					i:nil="true" />
+				<Controls>
+					<AxFormControl xmlns=""
+						i:type="AxFormButtonControl">
+						<Name>SelectCompanyInfoBtn</Name>
+						<ElementPosition>715827882</ElementPosition>
+						<FilterExpression>%1</FilterExpression>
+						<Type>Button</Type>
+						<VerticalSpacing>-1</VerticalSpacing>
+						<FormControlExtension
+							i:nil="true" />
+						<Text>@SYS2318</Text>
+					</AxFormControl>
+				</Controls>
+				<ArrangeMethod>HorizontalRight</ArrangeMethod>
+				<Style>DialogCommitContainer</Style>
+			</AxFormControl>
+		</Controls>
+	</Design>
+	<Parts />
+</AxForm>

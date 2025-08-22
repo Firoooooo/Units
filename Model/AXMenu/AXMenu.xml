@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxMenu xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="Microsoft.Dynamics.AX.Metadata.V1">
+	<Name>GeneralLedger</Name>
+	<Label>@SYS333959</Label>
+	<SetCompany>Yes</SetCompany>
+	<Elements>
+		<AxMenuElement xmlns=""
+			i:type="AxMenuElementSubMenu">
+			<Name>Workspaces</Name>
+			<Label>@SYS:Platform_Menu_ColHeading_Workspaces</Label>
+			<Elements />
+		</AxMenuElement>
+		<AxMenuElement xmlns=""
+			i:type="AxMenuElementSubMenu">
+			<Name>JournalEntries</Name>
+			<Label>@SYS331330</Label>
+			<Elements />
+		</AxMenuElement>
+		<AxMenuElement xmlns=""
+			i:type="AxMenuElementSubMenu">
+			<Name>InquiriesReports</Name>
+			<Label>@Ledger:InquiriesAndReports</Label>
+			<Elements />
+		</AxMenuElement>
+		<AxMenuElement xmlns=""
+			i:type="AxMenuElementSubMenu">
+			<Name>PeriodicTasks</Name>
+			<Label>@SYS76406</Label>
+			<Elements />
+		</AxMenuElement>
+		<AxMenuElement xmlns=""
+			i:type="AxMenuElementSubMenu">
+			<Name>Allocations</Name>
+			<Label>@SYS35298</Label>
+			<Elements />
+		</AxMenuElement>
+		<AxMenuElement xmlns=""
+			i:type="AxMenuElementSubMenu">
+			<Name>PeriodClose</Name>
+			<Label>@SYS329979</Label>
+			<Elements>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>LedgerCalendars_2</Name>
+					<MenuItemName>LedgerCalendars</MenuItemName>
+				</AxMenuElement>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>FiscalCalendars_2</Name>
+					<MenuItemName>FiscalCalendars</MenuItemName>
+				</AxMenuElement>
+			</Elements>
+		</AxMenuElement>
+		<AxMenuElement xmlns=""
+			i:type="AxMenuElementSubMenu">
+			<Name>ChartOfAccounts</Name>
+			<Label>@SYS40787</Label>
+			<Elements>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementSubMenu">
+					<Name>Accounts</Name>
+					<Label>@Ledger:LedgerAccountsMenu</Label>
+					<Elements>
+						<AxMenuElement xmlns=""
+							i:type="AxMenuElementMenuItem">
+							<Name>MainAccounts</Name>
+							<DisplayInContentArea>Yes</DisplayInContentArea>
+							<MenuItemName>MainAccountDetails</MenuItemName>
+						</AxMenuElement>
+						<AxMenuElement xmlns=""
+							i:type="AxMenuElementMenuItem">
+							<Name>ChartOfAccounts_2</Name>
+							<MenuItemName>LedgerChartOfAccounts</MenuItemName>
+						</AxMenuElement>
+						<AxMenuElement xmlns=""
+							i:type="AxMenuElementMenuItem">
+							<Name>MainAccountCategory</Name>
+							<MenuItemName>MainAccountCategory</MenuItemName>
+						</AxMenuElement>
+						<AxMenuElement xmlns=""
+							i:type="AxMenuElementMenuItem">
+							<Name>MainAccountTemplates</Name>
+							<MenuItemName>MainAccountTemplates</MenuItemName>
+						</AxMenuElement>
+						<AxMenuElement xmlns=""
+							i:type="AxMenuElementMenuItem">
+							<Name>LedgerAccountAlias</Name>
+							<MenuItemName>LedgerAccountAlias</MenuItemName>
+						</AxMenuElement>
+						<AxMenuElement xmlns=""
+							i:type="AxMenuElementMenuItem">
+							<Name>ConsolidateAccountGroup</Name>
+							<MenuItemName>LedgerConsolidateAccountGroup</MenuItemName>
+						</AxMenuElement>
+						<AxMenuElement xmlns=""
+							i:type="AxMenuElementMenuItem">
+							<Name>AdditionalConsolidationAccounts</Name>
+							<MenuItemName>MainAccountConsolidateAccount</MenuItemName>
+						</AxMenuElement>
+					</Elements>
+				</AxMenuElement>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementSubMenu">
+					<Name>Dimensions</Name>
+					<Label>@Ledger:Dimensions</Label>
+					<Elements>
+						<AxMenuElement xmlns=""
+							i:type="AxMenuElementMenuItem">
+							<Name>FinancialDimensions</Name>
+							<MenuItemName>DimensionDetails</MenuItemName>
+						</AxMenuElement>
+						<AxMenuElement xmlns=""
+							i:type="AxMenuElementMenuItem">
+							<Name>FinancialDimensionSets</Name>
+							<MenuItemName>DimensionFocusTable</MenuItemName>
+						</AxMenuElement>
+						<AxMenuElement xmlns=""
+							i:type="AxMenuElementMenuItem">
+							<Name>FinancialDimensionConfigIntegApp</Name>
+							<MenuItemName>DimensionIntegrationConfiguration</MenuItemName>
+						</AxMenuElement>
+						<AxMenuElement xmlns=""
+							i:type="AxMenuElementMenuItem">
+							<Name>DimensionDataIntegrityObjectValidation</Name>
+							<MenuItemName>DimensionDataIntegrityObjectValidation</MenuItemName>
+						</AxMenuElement>
+					</Elements>
+				</AxMenuElement>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementSubMenu">
+					<Name>Structures</Name>
+					<Label>@SYS83690</Label>
+					<Elements>
+						<AxMenuElement xmlns=""
+							i:type="AxMenuElementMenuItem">
+							<Name>ConfigureAccountStructures</Name>
+							<MenuItemName>DimensionConfigureAccountStructure</MenuItemName>
+						</AxMenuElement>
+						<AxMenuElement xmlns=""
+							i:type="AxMenuElementMenuItem">
+							<Name>AdvancedRuleStructures</Name>
+							<MenuItemName>DimensionConfigureAccountRuleStructure</MenuItemName>
+						</AxMenuElement>
+					</Elements>
+				</AxMenuElement>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementSubMenu">
+					<Name>FinancialTags</Name>
+					<Label>@FinTag:FinTag_Label</Label>
+					<Elements>
+						<AxMenuElement xmlns=""
+							i:type="AxMenuElementMenuItem">
+							<Name>FinTagConfiguration</Name>
+							<MenuItemName>FinancialTags</MenuItemName>
+						</AxMenuElement>
+						<AxMenuElement xmlns=""
+							i:type="AxMenuElementMenuItem">
+							<Name>FinTagRule</Name>
+							<MenuItemName>FinTagRule</MenuItemName>
+						</AxMenuElement>
+					</Elements>
+				</AxMenuElement>
+			</Elements>
+		</AxMenuElement>
+		<AxMenuElement xmlns=""
+			i:type="AxMenuElementSubMenu">
+			<Name>Currencies</Name>
+			<Label>@SYS4001976</Label>
+			<Elements>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>CurrencyExchangeRates</Name>
+					<MenuItemName>ExchangeRate</MenuItemName>
+					<ShowParentModule>No</ShowParentModule>
+				</AxMenuElement>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>ExchangeRateTypes</Name>
+					<MenuItemName>ExchangeRateType</MenuItemName>
+				</AxMenuElement>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>Currencies_2</Name>
+					<MenuItemName>Currency</MenuItemName>
+				</AxMenuElement>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>ConfigureExchangeRateProviders</Name>
+					<MenuItemName>ExchangeRateProviderConfiguration</MenuItemName>
+				</AxMenuElement>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>ImportCurrencyExchangeRates</Name>
+					<MenuItemName>ExchangeRateImportController</MenuItemName>
+					<MenuItemType>Action</MenuItemType>
+				</AxMenuElement>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>CurrencyRevaluationAccounts</Name>
+					<MenuItemName>CurrencyLedgerGainLossAccount</MenuItemName>
+					<ShowParentModule>No</ShowParentModule>
+				</AxMenuElement>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>DenominationCurrencies</Name>
+					<MenuItemName>CurrencyEuroDenomination</MenuItemName>
+				</AxMenuElement>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>ExchangeRateCalculationRules</Name>
+					<MenuItemName>ExchangeRateCurrencyPairCalculationRules</MenuItemName>
+				</AxMenuElement>
+			</Elements>
+		</AxMenuElement>
+		<AxMenuElement xmlns=""
+			i:type="AxMenuElementSubMenu">
+			<Name>Calendars</Name>
+			<Label>@SYS127976</Label>
+			<Elements>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>LedgerCalendar_3</Name>
+					<MenuItemName>LedgerCalendars</MenuItemName>
+				</AxMenuElement>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>FiscalCalendars_3</Name>
+					<MenuItemName>FiscalCalendars</MenuItemName>
+					<ShowParentModule>No</ShowParentModule>
+				</AxMenuElement>
+			</Elements>
+		</AxMenuElement>
+		<AxMenuElement xmlns=""
+			i:type="AxMenuElementSubMenu">
+			<Name>LedgerSetup</Name>
+			<Label>@Ledger:LedgerSetup</Label>
+			<Elements>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>Ledger</Name>
+					<MenuItemName>Ledger</MenuItemName>
+				</AxMenuElement>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>LedgerCalendar</Name>
+					<MenuItemName>LedgerCalendars</MenuItemName>
+				</AxMenuElement>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>FiscalCalendars</Name>
+					<MenuItemName>FiscalCalendars</MenuItemName>
+					<ShowParentModule>No</ShowParentModule>
+				</AxMenuElement>
+			</Elements>
+		</AxMenuElement>
+		<AxMenuElement xmlns=""
+			i:type="AxMenuElementSubMenu">
+			<Name>JournalSetup</Name>
+			<Label>@SYP4880892</Label>
+			<Elements>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>LedgerReasons</Name>
+					<MenuItemName>LedgerReasons</MenuItemName>
+				</AxMenuElement>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>FinancialReasons</Name>
+					<MenuItemName>Reasons</MenuItemName>
+					<ShowParentModule>No</ShowParentModule>
+				</AxMenuElement>
+			</Elements>
+		</AxMenuElement>
+		<AxMenuElement xmlns=""
+			i:type="AxMenuElementSubMenu">
+			<Name>PostingSetup</Name>
+			<Label>@Ledger:PostingSetup</Label>
+			<Elements>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>AccountsForAutomaticTransactions</Name>
+					<MenuItemName>LedgerSystemAccounts</MenuItemName>
+				</AxMenuElement>
+				<AxMenuElement xmlns=""
+					i:type="AxMenuElementMenuItem">
+					<Name>CurrencyRevaluationAccounts_2</Name>
+					<MenuItemName>CurrencyLedgerGainLossAccount</MenuItemName>
+					<ShowParentModule>No</ShowParentModule>
+				</AxMenuElement>
+			</Elements>
+		</AxMenuElement>
+	</Elements>
+</AxMenu>
