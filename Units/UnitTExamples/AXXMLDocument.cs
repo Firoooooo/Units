@@ -58,7 +58,7 @@ namespace UnitTExamples
 
         public XmlNamespaceManager CreateNamespaceManager()
         {
-            XmlNamespaceManager xMLNamespaceManager = new XmlNamespaceManager(this.Document.NameTable);
+            XmlNamespaceManager xMLNamespaceManager = new XmlNamespaceManager(Document.NameTable);
             xMLNamespaceManager.AddNamespace(string.Empty, DefaultNamespace);
             xMLNamespaceManager.AddNamespace("d", DefaultNamespace);
 
@@ -69,16 +69,16 @@ namespace UnitTExamples
         {
             if (IsUpdated())
             {
-                XmlWriterSettings settings = new XmlWriterSettings()
+                XmlWriterSettings xMLSettings = new XmlWriterSettings()
                 {
                     Indent = true
                 };
 
-                using (var fs = new FileStream(Path, FileMode.Truncate, FileAccess.Write, FileShare.Read))
+                using (var xMLStream = new FileStream(Path, FileMode.Truncate, FileAccess.Write, FileShare.Read))
                 {
-                    using (XmlWriter writer = XmlWriter.Create(fs, settings))
+                    using (XmlWriter xMLWriter = XmlWriter.Create(xMLStream, xMLSettings))
                     {
-                        Document.Save(writer);
+                        Document.Save(xMLWriter);
                     }
                 }
             }

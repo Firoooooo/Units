@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UnitTExamples
+﻿namespace UnitTExamples
 {
     public class AXNamespace
     {
         public static string GetNamespaceForType(AXType _xMLType)
         {
-            string ret = string.Empty;
+            string xMLNamespace = String.Empty;
 
             switch (_xMLType)
             {
@@ -19,23 +13,23 @@ namespace UnitTExamples
                 case AXType.AxMenuItemOutput:
                 case AXType.AxMenu:
                 case AXType.AxMenuExtension:
-                    ret = "Microsoft.Dynamics.AX.Metadata.V1";
+                    xMLNamespace = "Microsoft.Dynamics.AX.Metadata.V1";
                     break;
 
                 case AXType.AxForm:
-                    ret = "Microsoft.Dynamics.AX.Metadata.V6";
+                    xMLNamespace = "Microsoft.Dynamics.AX.Metadata.V6";
                     break;
 
                 case AXType.AxReport:
-                    ret = "Microsoft.Dynamics.AX.Metadata.V2";
+                    xMLNamespace = "Microsoft.Dynamics.AX.Metadata.V2";
                     break;
 
                 default:
-                    ret = String.Empty;
+                    xMLNamespace = String.Empty;
                     break;
             }
 
-            return ret;
+            return xMLNamespace;
         }
     }
 }

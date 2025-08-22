@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UnitTExamples
+﻿namespace UnitTExamples
 {
     public class AXPathUtility
     {
         const string FileEndingXml = ".xml";
 
-        public static AXType GetTypeFromFileName(string filePath)
+        public static AXType GetTypeFromFileName(string _pAth)
         {
-            string xMLObjectPath = Path.GetDirectoryName(filePath);
-            string xMLObjectType = Path.GetFileName(xMLObjectPath.TrimEnd(Path.DirectorySeparatorChar));
+            string xMLPath = Path.GetDirectoryName(_pAth);
+            string xMLObjectType = Path.GetFileName(xMLPath.TrimEnd(Path.DirectorySeparatorChar));
 
-            if (Enum.TryParse(xMLObjectType, true, out AXType parsedType))
+            if (Enum.TryParse(xMLObjectType, true, out AXType xMLType))
             {
-                return parsedType;
+                return xMLType;
             }
             else
             {
@@ -25,27 +19,27 @@ namespace UnitTExamples
             }
         }
 
-        public static string GetModelNameFromExtensionObject(string filePath)
+        public static string GetModelNameFromExtensionObject(string xMLPath)
         {
-            string ret = string.Empty;
+            string xMLModelName = String.Empty;
 
-            if (!string.IsNullOrEmpty(filePath)
-                && filePath.Count(c => c == '.') >= 2
-                && filePath.EndsWith(FileEndingXml))
+            if (!string.IsNullOrEmpty(xMLPath)
+                && xMLPath.Count(c => c == '.') >= 2
+                && xMLPath.EndsWith(FileEndingXml))
             {
-                string shortString = Path.GetFileName(filePath);
+                string sHort = Path.GetFileName(xMLPath);
 
-                if (shortString.Count(c => c == '.') == 2)
+                if (sHort.Count(c => c == '.') == 2)
                 {
-                    shortString = shortString.Replace(FileEndingXml, string.Empty);
+                    sHort = sHort.Replace(FileEndingXml, String.Empty);
 
-                    string[] splits = shortString.Split('.');
+                    string[] xMLSplittedValue = sHort.Split('.');
 
-                    ret = splits[splits.Length - 1];
+                    xMLModelName = xMLSplittedValue[xMLSplittedValue.Length - 1];
                 }
             }
 
-            return ret;
+            return xMLModelName;
         }
     }
 }
