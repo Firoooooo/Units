@@ -12,7 +12,7 @@ namespace UnitTMSTest
             string xMLPath = @"";
             AXXMLDocument xMLDocument = new AXXMLDocument(xMLPath);
             AxElementReaderFactory xMLReaderFactory = new AxElementReaderFactory();
-            AxElementReader xMLReader = xMLReaderFactory.GetReader(xMLDocument);
+            AXElementReader xMLReader = xMLReaderFactory.GetReader(xMLDocument);
             
         }
     }

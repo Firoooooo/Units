@@ -4,9 +4,9 @@ namespace UnitTExamples.Factories
 {
     public class AxElementReaderFactory
     {
-        public AxElementReader GetReader(AXXMLDocument _xMLDocument)
+        public AXElementReader GetReader(AXXMLDocument _xMLDocument)
         {
-            AxElementReader xMLReader = null;
+            AXElementReader xMLReader = null;
             AXType _xMLObjectType = _xMLDocument.Type;
 
             switch (_xMLDocument.Type)

@@ -2,14 +2,14 @@
 
 namespace UnitTExamples
 {
-    public abstract class AxElementReader
+    public abstract class AXElementReader
     {
         public AXType Type { get; }
         public AXXMLDocument AxDocument { get; }
         public string XPath { get; set; }
 
 
-        protected AxElementReader(AXType _xMLType, AXXMLDocument _xMLDocument, string _xPath)
+        protected AXElementReader(AXType _xMLType, AXXMLDocument _xMLDocument, string _xPath)
         {
             AxDocument = _xMLDocument;
             Type = _xMLType;

@@ -1,6 +1,6 @@
 ﻿namespace UnitTExamples.AXReader
 {
-    internal class AxRootPredecessor : AxElementReader
+    internal class AxRootPredecessor : AXElementReader
     {
         public AxRootPredecessor(AXType _xMLType, AXXMLDocument _xMLDocument, string _xPath)
             : base(_xMLType, _xMLDocument, _xPath)

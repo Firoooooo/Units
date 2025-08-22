@@ -26,7 +26,7 @@ namespace UnitTExamples.AXReader
         public override void InsertCommentIntoSource(string _xMLValue)
         {
             XmlNode xMLChildNode = this.AxDocument.Document.SelectSingleNode(this.XPath);
-            AxElementReader.InsertCommentIntoClass(xMLChildNode, _xMLValue);
+            AXElementReader.InsertCommentIntoClass(xMLChildNode, _xMLValue);
         }
     }
 }
