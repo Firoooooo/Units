@@ -1,8 +1,8 @@
 ﻿namespace UnitTExamples.AXReader
 {
-    internal class AxLastChildReader : AXElementReader
+    internal class AXLastChildReader : AXElementReader
     {
-        public AxLastChildReader(AXType _xMLType, AXXMLDocument _xMLDocument)
+        public AXLastChildReader(AXType _xMLType, AXXMLDocument _xMLDocument)
             : base(_xMLType, _xMLDocument, String.Empty)
         {
 
